@@ -1,0 +1,4 @@
+[submodule "container/workspaces/demo-projects"]
+	path = container/workspaces/demo-projects
+	url = https://github.com/openXC7/demo-projects
+	ignore = dirty

@@ -1,9 +1,19 @@
-FROM nixos/nix:latest
+# Built from the repository root (see Makefile) so the toolchain comes from this
+# checkout's flake.lock rather than GitHub's latest main. Everything is built into
+# the image, so starting a container needs no network.
+FROM docker.io/nixos/nix:2.35.3@sha256:ff480dbb23511aa1c10710aa068ceea5b93fed9bfce5f5379f3a6b07282cbc7b
 
 ARG workdir=/workspaces
 
-RUN echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf && mkdir $workdir && nix develop github:openxc7/toolchain-nix
+RUN echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf && mkdir $workdir
+
+# only what the flake reads
+COPY flake.nix flake.lock /toolchain/
+COPY nix /toolchain/nix
+
+# path: uses the copied files as-is instead of looking for a git repository
+RUN nix develop path:/toolchain --command true
 
 WORKDIR $workdir
 
-CMD ["nix", "develop", "github:openxc7/toolchain-nix"]
+CMD ["nix", "develop", "path:/toolchain"]

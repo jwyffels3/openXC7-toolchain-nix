@@ -1,0 +1,7 @@
+{
+  "basys3": {
+    "openfpgaloader": "basys3",
+    "part": "xc7a35tcpg236-1",
+    "family": "artix7"
+  }
+}

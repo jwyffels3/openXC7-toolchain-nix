@@ -13,6 +13,12 @@ make build
 make run
 ```
 
+### Pinned versions ###
+The image is built from this checkout's `flake.lock`, and the Nix base image is
+pinned by digest, so rebuilding gives the same toolchain and running it needs no
+network. To move to a newer toolchain, update this repository (e.g. `git pull`),
+then `make rebuild`.
+
 ### Example usage ###
 To run the development environment locally and compile blinky (see [screen recording](https://youtu.be/3cs_hfdYNE4)):
 ```shell

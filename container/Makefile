@@ -9,7 +9,7 @@ run:
 rebuild: clean build run
 
 build:
-	podman build -t $(CONTAINER) -f Containerfile
+	podman build -t $(CONTAINER) -f Containerfile ..
 
 clean:
 	podman rmi -f $(CONTAINER)
